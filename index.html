@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Pixel Art Maker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <script src="https://use.fontawesome.com/8c47be805b.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Exo:300,400,500,600|Montserrat:400" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <svg version="1.1" id="squares" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+        <rect x="1.5" y="1.3" style="fill:#9E2021;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" width="44.9" height="44.9"/><rect x="53.5" y="1.3" style="fill:#155F60;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" width="45.1" height="45.1"/><rect x="1.5" y="53.4" style="fill:#6C943E;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" width="45.1" height="45.1"/><rect x="53.5" y="53.4" style="fill:#1E7F3F;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" width="45.1" height="45.1"/>
+      </svg>
+    </div>
+    <h1 class="header-title">Pixel Art Maker</h1>
+    <h2 class="header-subtitle">by Anna Szałkiewicz</h2>
+  </div>
+  <div class="container">
+    <div class="main-nav">
+      <div class="close-header">
+        <div class="x-sign">
+          <i class="fa fa-window-close-o" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="welcome-guide">
+        <h2 class="welcome-heading">Welcome to Pixel Art Maker!</h2>
+        <ol class="welcome">
+          <li>
+            Choose canvas size
+          </li>
+          <li>
+            Pick a color
+          </li>
+          <li>
+            Click on Brush tool and start drawing!
+          </li>
+        </ol>
+        <p class="welcome">Hover icon to check its options or click ? icon for more help</p>
+      </div>
+      <div class="canvas-size">
+        <h2 class="nav-title">Select canvas size:</h2>
+        <label>Width:<input id="input-width" type="number" min="10" max="150" value="10" /></label>
+        <label>Height:<input id="input-height" type="number" min="10" max="150" value="10" /></label>
+        <button id="submit">Create canvas</button>
+      </div>
+      <div class="color-picker">
+        <h2>Pick a color</h2>
+        <input type="color" class="color-picker-input" id="color-input" autocomplete="on">
+      </div>
+      <!-- <div class="position">
+        <h2>Mouse position</h2>
+        <span id="pos-x" class="position"></span>
+        <span id="pos-y" class="position"></span>
+      </div> -->
+    </div>
+    <div class="arrow-right">
+      <i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i>
+    </div>
+    <div class="workarea" id="printable-area">
+      <nav class="button-nav">
+        <div id="save" class="tooltip">
+          <i class="fa fa-download fa-2x fa-fw" aria-hidden="true"></i></i>
+          <span class="tooltip-text">Save As</span>
+        </div>
+        <div id="print" class="tooltip">
+          <i class="fa fa-print fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Print image</span>
+        </div>
+        <div id="hide-grid" class="tooltip">
+          <i class="fa fa-th fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Hide/Show grid</span>
+        </div>
+        <div id="grid-size" class="tooltip">
+          <div id="grid-size-dropdown" class="dropdown">
+            <i class="fa fa-th-large fa-2x fa-fw" aria-hidden="true"></i>
+            <div id="grid-size-dropdown-content" class="dropdown-content">
+              <p id="small-grid">Small</p>
+              <p id="medium-grid">Medium</p>
+              <p id="large-grid">Large</p>
+            </div>
+          </div>
+          <span class="tooltip-text">Resize cell size</span>
+        </div>
+        <!-- <div id="brush-size" class="tooltip">
+          <div class="dropdown">
+            <span class="fa-stack fa-fw">
+              <i class="fa fa-paint-brush fa-stack-2x" aria-hidden="true"></i>
+              <i class="fa fa-arrows fa-stack-1x" aria-hidden="true"></i>
+            </span>
+            <input id="input-brush" class="dropdown-content" type="number" min="1" value="1" />
+            <span class="tooltip-text">Brush size</span>
+          </div>
+        </div> -->
+        <div id="draw-image" class="tooltip">
+          <i class="fa fa-paint-brush fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Brush tool</span>
+        </div>
+        <!-- <div id="eyedropper-tool" class="tooltip">
+          <i class="fa fa-eyedropper fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Eyedropper tool</span>
+        </div> -->
+        <div id="fill-bucket" class="tooltip">
+          <i class="material-icons md-36 fa-fw">format_color_fill</i>
+          <span class="tooltip-text">Fill image</span>
+        </div>
+        <div id="clear-canvas" class="tooltip">
+          <i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Clear image</span>
+        </div>
+        <div id="eraser" class="tooltip">
+          <i class="fa fa-eraser fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Clear cells</span>
+        </div>
+        <div id="insert_row" class="tooltip">
+          <i class="fa fa-arrows-v fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Make canvas higher</span>
+        </div>
+        <div id="insert_column" class="tooltip">
+          <i class="fa fa-arrows-h fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Make canvas wider</span>
+        </div>
+        <div id="help" class="tooltip">
+          <i class="fa fa-question fa-2x fa-fw" aria-hidden="true"></i>
+          <span class="tooltip-text">Help</span>
+        </div>
+        <div id="help-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+              <h1 class="modal-heading">How to play Pixel Art Maker?</h1>
+            </div>
+            <div class="modal-body">
+              <ol>
+                <li class="modal-list">
+                  Select width size (min. value is 10 and max. 150).
+                </li>
+                <li class="modal-list">
+                  To pick up a color click on color block. Window will pop out. Click anywhere on diagram to select color.
+                </li>
+                <li class="modal-list">
+                  Click on brush tool <i class="fa fa-paint-brush" aria-hidden="true"></i> and start painting.
+                </li>
+              </ol>
+              <div class="icons-description">
+                <h2 class="modal-heading">Available options</h2>
+                <div class="modal-table">
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-download fa-2x fa-fw" aria-hidden="true"></i></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to download image to your computer in png format
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-print fa-2x fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to print out your image.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-th fa-2x fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to hide / show grid. Grid is visible by default.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-th-large fa-2x fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to dropdown menu show up. Select small, medium or large option to increase cell size. Small size is selected by default.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <span class="fa-stack fa-fw">
+                        <i class="fa fa-paint-brush fa-stack-2x" aria-hidden="true"></i>
+                        <i class="fa fa-arrows fa-stack-1x" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <div class="modal-table-content">
+                      Click and select brush size.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-paint-brush fa-2x fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to enable brush tool. Click and drag to draw image.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="material-icons md-36 fa-fw">format_color_fill</i>
+                    </div>
+                    <div class="modal-table-content">
+                      Select color and click on icon to fill all canvas with selected color.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to clear canvas.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-eraser fa-2x fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to enable eraser tool. Click and drag to clear desired cells.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-arrows-h fa-2x fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to insert additional row to the bottom of canvas.
+                    </div>
+                  </div>
+                  <div class="modal-row">
+                    <div class="modal-icon">
+                      <i class="fa fa-arrows-v fa-2x fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal-table-content">
+                      Click to insert additional column to the right of canvas.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <table id="grid"></table>
+      <div id="preview-image">
+
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-logo">
+      <svg version="1.1" class="footer-logo" id="squares" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+        <rect x="1.5" y="1.3" style="fill:#9E2021;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" width="44.9" height="44.9"/>
+        <rect x="53.5" y="1.3" style="fill:#155F60;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" width="45.1" height="45.1"/>
+        <rect x="1.5" y="53.4" style="fill:#6C943E;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" width="45.1" height="45.1"/>
+        <rect x="53.5" y="53.4" style="fill:#1E7F3F;stroke:#000000;stroke-width:3;stroke-miterlimit:10;" width="45.1" height="45.1"/>
+      </svg>
+      <h1 class="title-footer">My Web Graphic Design</h1>
+      <p class="copyright">
+        Written and coded by Anna Szalkiewicz. Copyright &copy; 2018 All rights reserved.
+      </p>
+    </div>
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="html2canvas.js"></script>
+  <script src="print.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
